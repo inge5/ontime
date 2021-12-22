@@ -1,0 +1,140 @@
+<div class="pagina-full" id="wrapper">
+    <app-submenu></app-submenu>
+    <ngx-skeleton-loader count="1" *ngIf="loader" animation="progress" appearance="circle" [theme]="{ 'width':'100%','height':'430px','border-radius': '10px','padding':'15px' }"></ngx-skeleton-loader>
+    <div class="container">
+        <ngx-skeleton-loader class="d-flex pt-3 pb-3" count="2" *ngIf="loader" animation="progress" appearance="circle" [theme]="{ 'width':'100%','height':'250px','border-radius': '10px' }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader class="pb-3" count="1" *ngIf="loader" animation="progress" appearance="circle" [theme]="{ 'width':'100%','height':'430px','border-radius': '10px','padding':'15px' }"></ngx-skeleton-loader>
+    </div>
+    <div class="ontime-page position-relative" *ngIf="!loader">
+        <div *ngIf="data.banner" style="background:url('{{ data.banner.fondo }}');background-repeat: no-repeat;">
+            <div class="container pb-1">
+                <div class="row align-items-center mb-5 pt-5 pb-5">
+                    <div class="col-md-6 mt-3">
+                        <h2 class="size48 letter-spacing-069 line-height-50 font-weight-700" [innerHTML]="data.banner.texto | safeHtml: 'html'"></h2> 
+                        <p class="size21 font-weight-400 letter-spacing-1-28 line-height-29" [innerHTML]="data.banner.descripcion | safeHtml: 'html'"></p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img class="img-fluid img-phone" [src]="data.banner.imagen" alt="Productividad">
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="container" id="funcionalidades">
+            <div class="row pt-3" *ngIf="data.seccion1">
+                <div class="col-md-12 mb-3">
+                    <p class="text-black-dark letter-spacing-077 text-center line-height-35" [innerHTML]="data.seccion1.descripcion | safeHtml: 'html'"></p>
+                </div>
+                <ng-container *ngFor="let ruta of data.seccion1.rutas">
+                    <div class="col">
+                        <mat-card class="card-zoom p-2 img-cards-rutas min-height-220 mt-2 mb-2">
+                            <img class="d-inline-block mb-3 img-cards-rutas" [src]="ruta.icono" alt="Optimiza 1">
+                            <mat-card-content>
+                            <p class="size14 line-height-20 letter-spacing-001" [innerHTML]="ruta.descripcion | safeHtml: 'html'"></p>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="seccion3-ontime pt-100" *ngIf="data.seccion2">
+            <div class="container">
+                <ngx-skeleton-loader count="1" *ngIf="loader" animation="progress" appearance="circle" [theme]="{ 'width':'100%','height':'430px','border-radius': '10px','padding':'15px' }"></ngx-skeleton-loader>
+                <div class="row" *ngIf="!loader">
+                    <div class="col-md-5" data-aos="fade-down-left" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                         <img class="img-fluid" [src]="data.seccion2.imagen" alt="Comercial">
+                    </div>
+                    <div class="col-md-7 my-auto" data-aos="fade-down-right" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                        <h3 class="size22 ubuntu line-height-36 mb-2" [innerHTML]="data.seccion2.texto | safeHtml: 'html'"></h3>
+                        <ng-container *ngFor="let icono of data.seccion2.iconos">
+                            <ng-container *ngFor="let logo of icono.logo">
+                                <img class="card-zoom img-fluid" [src]="logo.url" alt="icono">
+                            </ng-container>
+                        </ng-container>
+                        <p class="font-weight-300 size18 letter-spacing-05 line-height-36 text-gray mb-0 mt-2">{{ data.seccion2.titulo_boton }}</p>
+                        <a mat-raised-button class="mt-3 demo-ontime size15 w-75 d-block border-radius-25 white-space-normal line-height-2-5" [href]="data.seccion2.url_boton" target="_blank">{{ data.seccion2.texto_boton }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seccion3-ontime pt-150 pb-150" *ngIf="data.seccion3">
+            <img class="img-back" [src]="data.seccion3.imagen" alt="Gestión Rutas" data-aos="fade-down-right" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 my-auto" data-aos="fade-down-left" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                        <p class="text-blue-dark font-weight-300 letter-spacing-069 line-height-33" [innerHTML]="data.seccion3.titulo | safeHtml: 'html'"></p>
+                        <div class="row">
+                            <div class="col-md-6" *ngIf="data.seccion3.url_boton_1">
+                                <a class="w-100 border-radius-25 demo-ontime size15 text-white text-decoration-none mt-2 mb-2" mat-raised-button [href]="data.seccion3.url_boton_1" target="_blank">{{ data.seccion3.texto_boton_1 }}</a>
+                            </div>
+                            <div class="col-md-6" *ngIf="data.seccion3.url_boton_2">
+                                <a class="w-100 border-radius-25 size15 demo-ontime-outline text-decoration-none mt-2 mb-2" mat-raised-button (click)="abrirSide()">{{ data.seccion3.texto_boton_2 }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seccion6-ontime pt-50 pb-50" *ngIf="data.seccion4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7" data-aos="fade-down-left" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                        <div class="row justify-content-end mb-2">
+                            <ng-container *ngFor="let beneficio of data.seccion4.beneficios">
+                                <div class="beneficio-ontime d-flex p-2 m-1 card-zoom">
+                                    <img class="img-fluid d-inline-block float-left mr-2" [src]="beneficio.icono" alt="Implementación">
+                                    <p class="size18 font-weight-700 line-height-22 letter-spacing-05 text-gray d-flex align-self-center mb-0">{{ beneficio.texto }}</p>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-md-5 my-auto" data-aos="fade-down-right" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                        <p class="size32 text-gray letter-spacing-097 line-height-36" [innerHTML]="data.seccion4.texto | safeHtml: 'html'"></p>
+                        <a *ngIf="data.seccion4.url_boton_1" mat-raised-button class="text-decoration-none demo-ontime size15 text-white border-radius-25 font-weight-300" [href]="data.seccion4.url_boton_1" target="_blank">{{ data.seccion4.texto_boton_1 }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seccion5-smartsales pt-50 pb-3">
+            <div class="container mb-5" *ngIf="data.seccion5">
+                <div class="row">
+                    <div class="col-md-6 my-auto" data-aos="fade-down-left" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                        <p class="font-weight-300 size25 letter-spacing-001n line-height-30 text-gray" [innerHTML]="data.seccion5.descripcion | safeHtml: 'html'"></p>
+                    </div>
+                    <div class="col-md-6" data-aos="fade-down-right" data-aos-anchor-placement="top-center" data-aos-duration="1000">
+                        <img class="img-fluid" [src]="data.seccion5.imagen" alt="Integración">
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5 pt-3" id="precios" *ngIf="data.seccion6">
+                <div class="row">
+                    <div class="col-md-6" data-aos="fade-down-left" data-aos-anchor-placement="top-center" data-aos-duration="1200">
+                        <img class="img-fluid" [src]="data.seccion6.imagen" alt="Solución Eficaz" />
+                    </div>
+                    <div class="col-md-6 my-auto" data-aos="fade-down-right" data-aos-anchor-placement="top-center" data-aos-duration="1200">
+                        <h3 class="ubuntu text-orange font-weight-700 size22 letter-spacing-071 line-height-32 mb-1">{{ data.seccion6.titulo }}</h3>
+                        <p class="text-black-intrack size22 letter-spacing-071 line-height-32" [innerHTML]="data.seccion6.descripcion | safeHtml: 'html'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white pt-5 pb-5 mt-5" *ngIf="data.seccion7">
+            <div style="background:url('{{ data.seccion7.icono_fondo_1 }}');background-repeat: no-repeat;background-position: left top;margin-top:-60px">
+                <div style="background:url('{{ data.seccion7.icono_fondo_2 }}');background-repeat: no-repeat;background-position: right;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img class="img-fluid mx-auto d-block mb-2" [src]="data.seccion7.imagen" alt="Logo Smartsuite">
+                                <h4 class="text-center text-gray letter-spacing-009 line-height-24" [innerHTML]="data.seccion7.descripcion | safeHtml: 'html'"></h4>
+                                <a class="mx-auto w-20 d-block border-radius-25 size15 demo-ontime-outline text-decoration-none" mat-raised-button [href]="data.seccion7.url_boton" target="_blank">{{ data.seccion7.texto_boton }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-animate-contacto></app-animate-contacto>
+    </div>
+    <app-sidebar></app-sidebar>
+</div>
